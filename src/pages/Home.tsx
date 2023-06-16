@@ -1,43 +1,49 @@
 import React from "react";
-import Sidebar from "../components/Sidebar.tsx";
-import Box from "@mui/material/Box";
-import '../assets/Sidebar.css';
 import ReactDOM from "react-dom";
-import DataTable from "react-data-table-component";
-
+import DataTable, { TableColumn } from "react-data-table-component";
 import { Card } from "@mui/material";
 import SortIcon from "@mui/icons-material/Sort";
+import movies from "../assets/movies";
 
-import movies from "../assets/movies.jsx";
+type Movie = {
+  id: number;
+  title: string;
+  year: string;
+  runtime: string;
+  genres: string[];
+  director: string;
+  actors: string;
+  plot: string;
+  posterUrl: string;
+};
 
-// import Card from "@material-ui/core/Card";
-// import SortIcon from "@material-ui/icons/ArrowDownward";
+type Selector<T> = (row: T) => string;
 
-const columns = [
+const columns: TableColumn<Movie>[] = [
   {
     name: "Title",
-    selector: "title",
+    selector: (row: Movie) => row.title,
     sortable: true
   },
   {
-    name: "Directior",
-    selector: "director",
+    name: "Director",
+    selector: (row: Movie) => row.director,
     sortable: true
   },
   {
     name: "Actor",
-    selector: "actors",
+    selector: (row: Movie) => row.actors,
     sortable: true
   },
   {
     name: "Runtime (m)",
-    selector: "runtime",
+    selector: (row: Movie) => row.runtime,
     sortable: true,
     right: true
   }
 ];
 
-export default function Home() {
+export const Home: React.FC = () => {
   return (
     <div className="App">
       <Card>
@@ -45,7 +51,7 @@ export default function Home() {
           title="Movies"
           columns={columns}
           data={movies}
-          defaultSortField="title"
+          defaultSortFieldId="title"
           sortIcon={<SortIcon />}
           pagination
           selectableRows
@@ -53,7 +59,7 @@ export default function Home() {
       </Card>
     </div>
   );
-}
+};
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(<Home />, rootElement);

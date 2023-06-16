@@ -2,7 +2,7 @@
 import React from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import City from "../pages/City.tsx";
-import Home from "../pages/Home.tsx";
+import { Home } from "../pages/Home.tsx";
 import Country from "../pages/Country.tsx";
 import Sidebar from "./Sidebar.tsx";
 
